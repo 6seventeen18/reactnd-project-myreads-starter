@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-class BookShelf extends Component {
+class BookCase extends Component {
   render() {
     return (
       <div>
@@ -19,6 +19,22 @@ class BookShelf extends Component {
                   </ol>
                 </div>
               </div>
+
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Want to Read</h2>
+                <div className="bookshelf-books">
+                  <ol className="books-grid">
+                  </ol>
+                </div>
+              </div>
+
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Read</h2>
+                <div className="bookshelf-books">
+                  <ol className="books-grid">
+                  </ol>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -31,4 +47,4 @@ class BookShelf extends Component {
   }
 }
 
-export default BookShelf
+export default BookCase
