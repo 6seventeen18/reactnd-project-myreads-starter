@@ -4,7 +4,7 @@ import Book from './Book'
 
 class BookShelf extends Component {
   render() {
-    const { title } = this.props
+    const { title, books } = this.props
 
     return (
       <div>
@@ -12,18 +12,17 @@ class BookShelf extends Component {
           <h2 className="bookshelf-title">{title}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
-              <li>
-                <Book
-                  author="Harper Lee"
-                  title="To Kill a Mockingbird"
-                  shelf="read"
-                  imageUrl="http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"
-                />
-              </li>
-
-              <li></li>
-
-              <li></li>
+              {books.map((book) => (
+                <li>
+                  <Book
+                    key={book.id}
+                    author={book.authors[0]}
+                    shelf={book.shelf}
+                    title={book.title}
+                    imageUrl={book.imageLinks.thumbnail}
+                  />
+                </li>
+              ))}
             </ol>
           </div>
         </div>
@@ -33,7 +32,8 @@ class BookShelf extends Component {
 }
 
 BookShelf.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  books: PropTypes.array.isRequired
 }
 
 export default BookShelf

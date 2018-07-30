@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
 class Book extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      shelf: this.props.shelf
+    }
+  }
+
   render() {
     const { title, author, shelf, imageUrl } = this.props
 
