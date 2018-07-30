@@ -11,7 +11,7 @@ class Book extends Component {
   }
 
   render() {
-    const { title, author, shelf, imageUrl } = this.props
+    const { title, authors, shelf, imageUrl } = this.props
 
     return (
       <div>
@@ -29,7 +29,7 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{title}</div>
-          <div className="book-authors">{author}</div>
+          <div className="book-authors">{authors}</div>
         </div>
       </div>
     )
@@ -40,7 +40,7 @@ export default Book
 
 Book.propTypes = {
   title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
+  authors: PropTypes.string.isRequired,
   shelf: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
 }
