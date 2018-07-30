@@ -4,7 +4,7 @@ import Book from './Book'
 
 class BookShelf extends Component {
   render() {
-    const { title, books } = this.props
+    const { title, books, onChangeShelf } = this.props
 
     return (
       <div>
@@ -15,10 +15,12 @@ class BookShelf extends Component {
               {books.map((book) => (
                 <li key={book.id}>
                   <Book
+                    id={book.id}
                     authors={book.authors.join()}
                     shelf={book.shelf}
                     title={book.title}
                     imageUrl={book.imageLinks.thumbnail}
+                    onChangeShelf={onChangeShelf}
                   />
                 </li>
               ))}
@@ -32,7 +34,8 @@ class BookShelf extends Component {
 
 BookShelf.propTypes = {
   title: PropTypes.string.isRequired,
-  books: PropTypes.array.isRequired
+  books: PropTypes.array.isRequired,
+  onChangeShelf: PropTypes.func.isRequired
 }
 
 export default BookShelf

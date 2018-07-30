@@ -7,11 +7,12 @@ class BookCase extends Component {
   /* TODO: Ask if there is a preference between defining propTypes
            this way vs after the class with ClassName.propTypes */
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books } = this.props
+    const { books, onChangeShelf } = this.props
     const currentlyReadingBooks = books.filter((book) => book.shelf === 'currentlyReading')
     const wantToReadBooks = books.filter((book) => book.shelf === 'wantToRead')
     const readBooks = books.filter((book) => book.shelf === 'read')
@@ -25,9 +26,10 @@ class BookCase extends Component {
 
           <div className="list-books-content">
             <div>
-              <BookShelf key="currentlyReadingShelf" title="Currently Reading" books={currentlyReadingBooks} />
-              <BookShelf key="wantToReadShelf" title="Want to Read" books={wantToReadBooks} />
-              <BookShelf key="readShelf" title="Read" books={readBooks} />
+              <BookShelf key="currentlyReadingShelf" title="Currently Reading" books={currentlyReadingBooks}
+                         onChangeShelf={onChangeShelf} />
+              <BookShelf key="wantToReadShelf" title="Want to Read" books={wantToReadBooks} onChangeShelf={onChangeShelf} />
+              <BookShelf key="readShelf" title="Read" books={readBooks} onChangeShelf={onChangeShelf} />
             </div>
           </div>
         </div>

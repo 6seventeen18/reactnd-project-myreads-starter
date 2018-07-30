@@ -17,11 +17,22 @@ class BooksApp extends Component {
     })
   }
 
+  changeShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+    }))
+  }
+
   render() {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
-          <BookCase books={this.state.books} />
+          <BookCase
+            books={this.state.books}
+            onChangeShelf={(book, shelf) => {
+              this.changeShelf(book, shelf)
+            }}
+          />
         )}/>
 
         <Route exact path='/search' render={() => (
