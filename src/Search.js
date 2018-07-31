@@ -16,9 +16,7 @@ class Search extends Component {
     this.setState({query})
 
     if(query) {
-      console.log("searching using query [" + query + "]")
       BooksAPI.search(query).then((books) => {
-        console.log("returned books [" + books + "]")
         if(books.constructor === Array) {
           books.sort(sortBy('title'))
           this.setState({ books: books })
@@ -26,12 +24,10 @@ class Search extends Component {
         else {
           this.setState({ books: [] })
         }
-        console.log("books set to [" + this.state.books + "]")
       })
     }
     else {
       this.setState({ books: [] })
-      console.log("books set to []")
     }
   }
 
