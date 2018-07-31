@@ -26,7 +26,7 @@ class BooksApp extends Component {
   }
 
   updateBook = (book, shelf) => {
-    console.log("updateBook")
+    BooksAPI.update(book, shelf)
   }
 
   render() {
