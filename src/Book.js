@@ -44,7 +44,7 @@ class Book extends Component {
 export default Book
 
 Book.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   authors: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,

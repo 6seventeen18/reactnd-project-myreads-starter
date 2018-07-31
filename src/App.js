@@ -25,6 +25,10 @@ class BooksApp extends Component {
     })
   }
 
+  updateBook = (book, shelf) => {
+    console.log("updateBook")
+  }
+
   render() {
     return (
       <div className="app">
@@ -36,7 +40,10 @@ class BooksApp extends Component {
         )}/>
 
         <Route exact path='/search' render={() => (
-          <Search />
+          <Search
+            books={this.state.books}
+            onChangeShelf={this.updateBook}
+          />
         )}/>
 
         <Route path='/mockup' component={Mockup}/>
