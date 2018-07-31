@@ -11,8 +11,9 @@ class BooksApp extends Component {
     books: []
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     BooksAPI.getAll().then((books) => {
+      console.log("book count: " + books.length)
       this.setState({ books })
     })
   }
@@ -23,10 +24,6 @@ class BooksApp extends Component {
           this.setState({ books })
         })
     })
-  }
-
-  updateBook = (book, shelf) => {
-    BooksAPI.update(book, shelf)
   }
 
   render() {
@@ -41,8 +38,7 @@ class BooksApp extends Component {
 
         <Route exact path='/search' render={() => (
           <Search
-            books={this.state.books}
-            onChangeShelf={this.updateBook}
+            onChangeShelf={this.changeShelf}
           />
         )}/>
 
