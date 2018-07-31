@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
@@ -7,11 +8,19 @@ import sortBy from 'sort-by'
 
 class Search extends Component {
   state = {
-    query: ''
+    query: '',
+    books: []
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
+    this.setState({ query: query })
+
+    if(query.trim())
+      BooksAPI.search(query.trim()).then((books) => {
+        this.setState({ books: books })
+      })
+    else
+      this.setState({ books: [] })
   }
 
   render() {
@@ -20,7 +29,6 @@ class Search extends Component {
 
     let displayedBooks
     if (query) {
-      // debugger
       const match = new RegExp(escapeRegExp(query), 'i')
       displayedBooks = books.filter(
         (book) => match.test(book.title) || match.test(book.authors.join())
@@ -73,7 +81,6 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  books: PropTypes.array.isRequired,
   onChangeShelf: PropTypes.func.isRequired
 }
 
