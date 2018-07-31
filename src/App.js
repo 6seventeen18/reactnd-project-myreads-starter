@@ -18,9 +18,11 @@ class BooksApp extends Component {
   }
 
   changeShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-    }))
+    BooksAPI.update(book, shelf).then((response) => {
+        BooksAPI.getAll().then((books) => {
+          this.setState({ books })
+        })
+    })
   }
 
   render() {
@@ -29,9 +31,7 @@ class BooksApp extends Component {
         <Route exact path='/' render={() => (
           <BookCase
             books={this.state.books}
-            onChangeShelf={(book, shelf) => {
-              this.changeShelf(book, shelf)
-            }}
+            onChangeShelf={this.changeShelf}
           />
         )}/>
 

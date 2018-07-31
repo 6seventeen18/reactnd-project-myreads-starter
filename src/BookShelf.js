@@ -21,6 +21,7 @@ class BookShelf extends Component {
                     title={book.title}
                     imageUrl={book.imageLinks.thumbnail}
                     onChangeShelf={onChangeShelf}
+                    book={book}
                   />
                 </li>
               ))}

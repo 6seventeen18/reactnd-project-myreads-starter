@@ -10,18 +10,8 @@ class Book extends Component {
     }
   }
 
-  updateBook = (e) => {
-    var shelf = e.target.value
-
-    this.setState({
-      shelf: shelf
-    }, () => {
-      this.props.onChangeShelf(this.props, shelf)
-    })
-  }
-
   render() {
-    const { title, authors, shelf, imageUrl, onChangeShelf } = this.props
+    const { title, authors, imageUrl } = this.props
 
     return (
       <div>
@@ -30,7 +20,10 @@ class Book extends Component {
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${imageUrl})` }}></div>
 
             <div className="book-shelf-changer">
-              <select defaultValue={this.state.shelf} onChange={this.updateBook}>
+              <select
+                defaultValue={this.state.shelf}
+                onChange={e => this.props.onChangeShelf(this.props.book, e.target.value)}
+              >
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
@@ -56,4 +49,5 @@ Book.propTypes = {
   authors: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   onChangeShelf: PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired,
 }
