@@ -15,21 +15,29 @@ class Search extends Component {
   updateQuery = (query) => {
     this.setState({query})
 
-    if(query)
+    if(query) {
+      console.log("searching using query [" + query + "]")
       BooksAPI.search(query).then((books) => {
-        this.setState({ books: books })
-        console.log("books set to [" + books + "]")
+        console.log("returned books [" + books + "]")
+        if(books.constructor === Array) {
+          books.sort(sortBy('title'))
+          this.setState({ books: books })
+        }
+        else {
+          this.setState({ books: [] })
+        }
+        console.log("books set to [" + this.state.books + "]")
       })
-    else
+    }
+    else {
       this.setState({ books: [] })
       console.log("books set to []")
+    }
   }
 
   render() {
     const { onChangeShelf } = this.props
     const { query, books } = this.state
-
-    books.sort(sortBy('title'))
 
     return (
       <div>
@@ -53,11 +61,6 @@ class Search extends Component {
               {books.map((book) => (
                 <li key={book.id}>
                   <Book
-                    id={book.id}
-                    authors={book.authors.join()}
-                    shelf={book.shelf}
-                    title={book.title}
-                    imageUrl={book.imageLinks.thumbnail}
                     onChangeShelf={onChangeShelf}
                     book={book}
                   />

@@ -6,12 +6,14 @@ class Book extends Component {
     super(props)
 
     this.state = {
-      shelf: props.shelf
+      shelf: this.props.book.shelf
     }
   }
 
   render() {
-    const { title, authors, imageUrl } = this.props
+    const imageUrl = this.props.book.imageLinks && this.props.book.imageLinks.thumbnail
+    const authors = this.props.book.authors && this.props.book.authors.join()
+    const title = this.props.book.title
 
     return (
       <div>
@@ -21,7 +23,7 @@ class Book extends Component {
 
             <div className="book-shelf-changer">
               <select
-                defaultValue={this.state.shelf}
+                defaultValue={this.state.shelf || "none"}
                 onChange={e => this.props.onChangeShelf(this.props.book, e.target.value)}
               >
                 <option value="move" disabled>Move to...</option>
@@ -44,10 +46,6 @@ class Book extends Component {
 export default Book
 
 Book.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  authors: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
   onChangeShelf: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired,
 }
