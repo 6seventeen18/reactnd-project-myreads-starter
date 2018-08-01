@@ -32,7 +32,7 @@ class Search extends Component {
   }
 
   render() {
-    const { onChangeShelf } = this.props
+    const { onChangeShelf, categorizedBooks } = this.props
     const { query, books } = this.state
 
     return (
@@ -59,6 +59,7 @@ class Search extends Component {
                   <Book
                     onChangeShelf={onChangeShelf}
                     book={book}
+                    books={categorizedBooks}
                   />
                 </li>
               ))}
@@ -72,7 +73,8 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  onChangeShelf: PropTypes.func.isRequired
+  onChangeShelf: PropTypes.func.isRequired,
+  categorizedBooks: PropTypes.array.isRequired
 }
 
 export default Search
